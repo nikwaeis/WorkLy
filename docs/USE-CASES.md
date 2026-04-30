@@ -1,6 +1,7 @@
 # Use cases
 
 ## Map
+## Map
   - [[UC-01] Account Creation (Verification Level 1)](#uc-01-account-creation-verification-level-1)
   - [[UC-02] Profile Specialization Setup](#uc-02-profile-specialization-setup)
   - [[UC-03] Phone Number Verification](#uc-03-phone-number-verification)
@@ -16,6 +17,21 @@
   - [[UC-13] Pricing Model Selection](#uc-13-pricing-model-selection)
   - [[UC-14] Save Order as Draft](#uc-14-save-order-as-draft)
   - [[UC-15] Order Cancellation (Pre-selection)](#uc-15-order-cancellation-pre-selection)
+  - [[UC-16] Applicant List Review](#uc-16-applicant-list-review)
+  - [[UC-17] Real-time Job Feed](#uc-17-real-time-job-feed)
+  - [[UC-18] Category Filtering](#uc-18-category-filtering)
+  - [[UC-19] Map-based Search](#uc-19-map-based-search)
+  - [[UC-20] Price Range Filtering](#uc-20-price-range-filtering)
+  - [[UC-21] Favorites / Bookmarks](#uc-21-favorites--bookmarks)
+  - [[UC-22] Client Exclusion (Hidden Feed)](#uc-22-client-exclusion-hidden-feed)
+  - [[UC-23] Proximity Visibility](#uc-23-proximity-visibility)
+  - [[UC-24] Category-Specific Push Notifications](#uc-24-category-specific-push-notifications)
+  - [[UC-25] Job Application with Cover Letter](#uc-25-job-application-with-cover-letter)
+  - [[UC-26] Price Counter-Offer (Bidding)](#uc-26-price-counter-offer-bidding)
+  - [[UC-27] Performer Profile Review](#uc-27-performer-profile-review)
+  - [[UC-28] Pre-Hire Messaging](#uc-28-pre-hire-messaging)
+  - [[UC-29] Hire Confirmation](#uc-29-hire-confirmation)
+  - [[UC-30] Hiring Confirmation Receipt](#uc-30-hiring-confirmation-receipt)
   - [[UC-31] Withdraw Application](#uc-31-withdraw-application)
   - [[UC-32] Real-time Status: "Heading There"](#uc-32-real-time-status-heading-there)
   - [[UC-33] Secure In-App Messaging](#uc-33-secure-in-app-messaging)
@@ -639,6 +655,608 @@ Then the system must block the submission and highlight the missing fields as ma
     - **When** the client tries to cancel;
         
     - **Then** the system redirects them to the "Dispute/Cancel Agreement" flow instead of simple deletion.
+ 
+  ### [UC-16] Applicant List Review
+
+**1. Description**
+
+- **Actor:** Client
+    
+- **Goal:** To compare multiple performers who applied for the job.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Client views their job posting details.
+    
+2. The System displays a list of all Performers who clicked "Apply."
+    
+3. The Client sees each performer's Rating, Badge, and Message.
+    
+4. The Client clicks on a name to see their full profile.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Sorting Applicants** * **Given** multiple applicants;
+    
+    - **When** the client selects "Sort by Rating";
+        
+    - **Then** the performers with the highest scores appear first.
+        
+- **[ ] AC 2: Counter-offer Visibility** * **Given** an applicant suggested a different price;
+    
+    - **When** the client views the list;
+        
+    - **Then** the suggested price must be highlighted next to the performer's name.
+
+
+### [UC-17] Real-time Job Feed
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To see a constantly updated list of available jobs to ensure they don't miss new opportunities.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer opens the "Find Work" section.
+    
+2. The System fetches the most recent job postings.
+    
+3. The Performer scrolls through the list.
+    
+4. The System automatically pushes a "New Jobs Available" notification or updates the list when a new task is published.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Chronological Order**
+    
+    - **Given** multiple jobs are posted at different times;
+        
+    - **When** the performer views the feed;
+        
+    - **Then** the newest jobs must appear at the top.
+        
+- **[ ] AC 2: Dynamic Refresh**
+    
+    - **Given** the performer is actively looking at the list;
+        
+    - **When** a new job is created by a client;
+        
+    - **Then** the system should display a "New jobs available" banner or inject the job into the feed without a full page reload.
+        
+
+---
+
+### [UC-18] Category Filtering
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To narrow down the job list to specific industries or types of work they are interested in.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer clicks on the "Filters" icon.
+    
+2. The Performer selects one or more categories (e.g., "Delivery" and "Cleaning").
+    
+3. The Performer applies the filters.
+    
+4. The System displays only the jobs belonging to the selected categories.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Multi-select Support**
+    
+    - **Given** the performer wants to see both "IT" and "Design" tasks;
+        
+    - **When** they select both checkboxes;
+        
+    - **Then** the feed must show results for both categories simultaneously.
+        
+- **[ ] AC 2: Empty Result State**
+    
+    - **Given** no jobs exist in a selected category;
+        
+    - **When** the filter is applied;
+        
+    - **Then** the system must display a "No jobs found in this category" message with an option to reset filters.
+        
+
+---
+
+### [UC-19] Map-based Search
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To visualize where jobs are located geographically to plan their route and minimize travel time.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer toggles from "List View" to "Map View."
+    
+2. The System displays pins on a map representing active job locations.
+    
+3. The Performer clicks on a pin.
+    
+4. The System shows a mini-preview of the job (Title, Price, Distance).
+    
+5. The Performer clicks the preview to open the full job details.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Area-based Loading**
+    
+    - **Given** the performer pans or zooms the map;
+        
+    - **When** the map movement stops;
+        
+    - **Then** the system should fetch and display pins only for the currently visible area.
+        
+- **[ ] AC 2: User Location Centering**
+    
+    - **Given** the performer grants GPS permissions;
+        
+    - **When** they click the "My Location" button;
+        
+    - **Then** the map must center on their current coordinates and show nearby pins.
+        
+
+---
+
+### [UC-20] Price Range Filtering
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To exclude low-paying jobs and focus on tasks that meet their minimum income requirements.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer opens the filter menu.
+    
+2. The Performer enters a "Minimum Price" value.
+    
+3. The Performer applies the filter.
+    
+4. The System refreshes the feed to show only jobs with a budget equal to or higher than the specified amount.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Value Validation**
+    
+    - **Given** the performer enters a negative number or a maximum price lower than the minimum;
+        
+    - **When** they try to apply;
+        
+    - **Then** the system must block the action and show a validation error.
+        
+- **[ ] AC 2: Live Count**
+    
+    - **Given** the performer adjusts the price slider;
+        
+    - **When** the slider moves;
+        
+    - **Then** the system should (ideally) show the number of matching results in real-time on the "Apply" button.
+        
+
+---
+
+### [UC-21] Favorites / Bookmarks
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To save interesting jobs to a dedicated list so they can review or apply to them later.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer sees an interesting job in the feed.
+    
+2. The Performer clicks the "Heart" or "Bookmark" icon on the job card.
+    
+3. The System adds the job to the "My Favorites" section.
+    
+4. The Performer navigates to "My Favorites" to view all saved tasks.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Toggle State**
+    
+    - **Given** a job is already in favorites;
+        
+    - **When** the performer clicks the icon again;
+        
+    - **Then** the job must be removed from favorites and the icon visual state updated.
+        
+- **[ ] AC 2: Availability Check**
+    
+    - **Given** a bookmarked job is deleted or filled by another performer;
+        
+    - **When** the performer views their favorites list;
+        
+    - **Then** the job should be marked as "Unavailable" or "Expired."
+        
+
+---
+
+### [UC-22] Client Exclusion (Hidden Feed)
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To hide jobs from specific clients with whom they do not wish to work.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer views a job post from a specific Client.
+    
+2. The Performer selects "Don't show jobs from this user" in the options menu.
+    
+3. The System removes all current posts from that client from the performer's feed.
+    
+4. The System ensures future posts from this client are automatically hidden for this performer.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Immediate Removal**
+    
+    - **Given** the performer blocks a client;
+        
+    - **When** the action is confirmed;
+        
+    - **Then** the feed should update instantly without a page refresh.
+        
+- **[ ] AC 2: Blacklist Management**
+    
+    - **Given** a performer has blocked multiple clients;
+        
+    - **When** they go to "Settings -> Blocked Users";
+        
+    - **Then** they should be able to see the list and unblock a client if desired.
+        
+
+---
+
+### [UC-23] Proximity Visibility
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To quickly see how far away a job is from their current location without opening a map.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer views the standard job feed.
+    
+2. The System calculates the distance between the Performer's current GPS location and the job's location.
+    
+3. The System displays "X km away" directly on each job card in the list.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Distance Accuracy**
+    
+    - **Given** the performer's location is known;
+        
+    - **When** a job is 5.2 km away;
+        
+    - **Then** the label should reflect this distance rounded to one decimal place.
+        
+- **[ ] AC 2: Permission Fallback**
+    
+    - **Given** the performer has disabled GPS;
+        
+    - **When** they view the feed;
+        
+    - **Then** the distance label should be hidden or replaced with the name of the neighborhood/city.
+        
+
+---
+
+### [UC-24] Category-Specific Push Notifications
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To be notified instantly when a job in their preferred category is posted, even when the app is closed.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer subscribes to notifications for the "Plumbing" category.
+    
+2. A Client publishes a new "Plumbing" task.
+    
+3. The System identifies all performers subscribed to this category.
+    
+4. The System sends a Push Notification to the Performer's device.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Instant Delivery**
+    
+    - **Given** the performer has a stable internet connection;
+        
+    - **When** the job is published;
+        
+    - **Then** the notification should arrive within seconds.
+        
+- **[ ] AC 2: Category Relevance**
+    
+    - **Given** the performer is only subscribed to "IT";
+        
+    - **When** a "Cleaning" job is posted;
+        
+    - **Then** the performer should **not** receive a notification.
+
+
+### [UC-25] Job Application with Cover Letter
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To apply for a specific task and explain why they are the best fit for the job.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer views the details of an active job posting.
+    
+2. The Performer clicks the "Apply" button.
+    
+3. The Performer enters a short message (Cover Letter) describing their experience or plan.
+    
+4. The Performer submits the application.
+    
+5. The System adds the Performer to the Client's applicant list and notifies the Client.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Application Submission**
+    
+    - **Given** the performer has entered a valid cover letter;
+        
+    - **When** they click "Submit Application";
+        
+    - **Then** the application is saved, and a success message is displayed.
+        
+- **[ ] AC 2: Message Length Validation**
+    
+    - **Given** the user tries to submit an empty message or one exceeding 500 characters;
+        
+    - **When** they click submit;
+        
+    - **Then** the system displays a validation error and blocks the request.
+        
+- **[ ] AC 3: Duplicate Prevention**
+    
+    - **Given** the performer has already applied to this job;
+        
+    - **When** they view the job details again;
+        
+    - **Then** the "Apply" button is disabled and replaced with "Already Applied."
+        
+
+---
+
+### [UC-26] Price Counter-Offer (Bidding)
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To propose a different price if the client's budget does not match the performer's expectations.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer clicks "Apply" on a job with "Open for Offers" status.
+    
+2. The Performer enters their proposed price.
+    
+3. The Performer submits the application.
+    
+4. The System displays this price specifically to the Client in the applicant list.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Offer Visibility**
+    
+    - **Given** the performer submitted a bid of $50 on a $40 job;
+        
+    - **When** the client views applicants;
+        
+    - **Then** the client must clearly see the $50 counter-offer.
+        
+- **[ ] AC 2: Reasonable Range Validation**
+    
+    - **Given** the performer enters a price of 0 or a negative number;
+        
+    - **When** they click submit;
+        
+    - **Then** the system must block the offer and prompt for a positive value.
+        
+
+---
+
+### [UC-27] Performer Profile Review
+
+**1. Description**
+
+- **Actor:** Client
+    
+- **Goal:** To evaluate the quality of an applicant based on their platform history.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Client opens the list of applicants for their job.
+    
+2. The Client clicks on a Performer’s name/avatar.
+    
+3. The System opens a modal or page showing the Performer's average rating, total completed tasks, and individual reviews from past clients.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Summary Statistics**
+    
+    - **Given** the performer has completed 10 jobs with varying ratings;
+        
+    - **When** the client views the profile;
+        
+    - **Then** the system must display the calculated average star rating and total job count.
+        
+- **[ ] AC 2: Review Access**
+    
+    - **Given** the performer has past feedback;
+        
+    - **When** the client scrolls down;
+        
+    - **Then** they must be able to read the specific comments left by previous clients.
+        
+
+---
+
+### [UC-28] Pre-Hire Messaging
+
+**1. Description**
+
+- **Actor:** Client
+    
+- **Goal:** To discuss details and clarify expectations with a candidate before officially hiring them.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Client views an applicant in the list.
+    
+2. The Client clicks the "Message" icon.
+    
+3. The System opens a chat window linked to this specific job.
+    
+4. The Client sends a question; the Performer receives a notification and responds.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Contextual Chat**
+    
+    - **Given** the client starts a chat from a job application;
+        
+    - **When** the chat opens;
+        
+    - **Then** the top of the chat should display the job title as the current context.
+        
+- **[ ] AC 2: Instant Notification**
+    
+    - **Given** the client sends a message;
+        
+    - **When** the performer is online;
+        
+    - **Then** the performer must receive a real-time notification (WebSocket or Push).
+        
+
+---
+
+### [UC-29] Hire Confirmation
+
+**1. Description**
+
+- **Actor:** Client
+    
+- **Goal:** To officially select a Performer and start the job contract.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Client decides on a Performer and clicks the "Hire" button.
+    
+2. The System prompts for a final confirmation.
+    
+3. The Client confirms.
+    
+4. The System changes the job status to "In Progress" and notifies the hired Performer.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Selection finalization**
+    
+    - **Given** the client clicks "Hire";
+        
+    - **When** they confirm the action;
+        
+    - **Then** all other applicants should receive a notification that the position has been filled.
+        
+- **[ ] AC 2: Job Status Update**
+    
+    - **Given** a performer is hired;
+        
+    - **When** the operation completes;
+        
+    - **Then** the job must be removed from the public "Find Work" feed.
+        
+
+---
+
+### [UC-30] Hiring Confirmation Receipt
+
+**1. Description**
+
+- **Actor:** Performer
+    
+- **Goal:** To receive formal notice that their application was accepted and they can begin work.
+    
+
+**2. Main Success Scenario (Happy Path)**
+
+1. The Performer receives a push notification: "You've been hired for [Job Title]!"
+    
+2. The Performer clicks the notification.
+    
+3. The System redirects them to the "Active Jobs" tab with the specific order details open.
+    
+
+**3. Acceptance Criteria (AC)**
+
+- **[ ] AC 1: Direct Redirection**
+    
+    - **Given** the performer is on any screen in the app;
+        
+    - **When** they tap the hiring notification;
+        
+    - **Then** the system must navigate directly to the specific active job view.
 
 
 ### [UC-31] Withdraw Application
